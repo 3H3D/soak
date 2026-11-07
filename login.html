@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ferwapdistro</title>
+  <!-- Font Awesome untuk Ikon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body style="display:flex; flex-direction:column; justify-content:space-between; align-items:center; min-height:100vh; margin:0; background-color:#000000; color:#fff; font-family:sans-serif;">
+
+  <!-- HEADER: Full Red Background -->
+  <header style="width:100%; padding:16px 32px; display:flex; justify-content:space-between; align-items:center; background:#ff2a2a; box-sizing:border-box;">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div style="background:#000; color:#ff2a2a; font-weight:bold; width:36px; height:36px; display:flex; justify-content:center; align-items:center; border-radius:8px; font-size:16px;">3H</div>
+      <div>
+        <h3 style="margin:0; color:#fff; font-size:16px; letter-spacing:0.5px;">FERWAP MUSIC</h3>
+        <span style="font-size:11px; color:#f0f0f0;">distribution</span>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:20px; font-size:14px;">
+      <a href="mailto:support@ferwap.com" style="color:#fff; text-decoration:none; transition:0.2s;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#fff'">Support</a>
+      <a href="#feedback" onclick="alert('Please contact admin via email for feedback or technical support.'); return false;" style="color:#fff; text-decoration:none; transition:0.2s;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#fff'">Feedback</a>
+    </div>
+  </header>
+
+  <!-- MAIN AUTH CONTAINER: Red Border Accent -->
+  <div style="background:#0d0d0d; border:2px solid #ff2a2a; border-radius:12px; padding:32px; width:100%; max-width:400px; box-shadow:0 8px 24px rgba(255,42,42,0.15); margin: 20px;">
+    
+    <div style="text-align:center; margin-bottom:24px;">
+      <h2 style="color:#fff; margin-bottom:8px; font-size:20px;">Portal Access</h2>
+      <p style="color:#a0a0a0; font-size:14px;">Sign in or create your account</p>
+    </div>
+
+    <!-- Mode Selector Tabs -->
+    <div style="display:flex; margin-bottom:20px; border-bottom:1px solid #222;">
+      <button id="tab-login" onclick="switchMode('login')" style="flex:1; padding:10px; background:none; border:none; color:#ff2a2a; border-bottom:2px solid #ff2a2a; cursor:pointer; font-weight:bold;">Sign In</button>
+      <button id="tab-signup" onclick="switchMode('signup')" style="flex:1; padding:10px; background:none; border:none; color:#a0a0a0; cursor:pointer; font-weight:bold;">Sign Up</button>
+    </div>
+
+    <!-- Authentication Form -->
+    <form id="auth-form" style="display:flex; flex-direction:column; gap:16px;">
+      <div id="artist-name-group" style="display:none; flex-direction:column; gap:6px;">
+        <label style="font-size:12px; color:#a0a0a0;">Name</label>
+        <input type="text" id="artist-name" placeholder="Stage Name" style="background:#000; border:1px solid #333; padding:12px; border-radius:6px; color:#fff; outline:none;">
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <label style="font-size:12px; color:#a0a0a0;">Email Address</label>
+        <input type="email" id="auth-email" placeholder="Email" required style="background:#000; border:1px solid #333; padding:12px; border-radius:6px; color:#fff; outline:none;">
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <label style="font-size:12px; color:#a0a0a0;">Password</label>
+        <div style="position:relative; display:flex; align-items:center;">
+          <input type="password" id="auth-password" placeholder="Password" required style="width:100%; background:#000; border:1px solid #333; padding:12px 40px 12px 12px; border-radius:6px; color:#fff; outline:none; box-sizing:border-box;">
+          <i id="toggle-password" class="fa-solid fa-eye" onclick="togglePasswordVisibility()" style="position:absolute; right:12px; color:#a0a0a0; cursor:pointer;"></i>
+        </div>
+      </div>
+
+      <button type="submit" id="btn-submit" style="background:#ff2a2a; color:#fff; font-weight:bold; padding:12px; border:none; border-radius:6px; cursor:pointer; margin-top:10px; transition:0.2s;" onmouseover="this.style.background='#e02424'" onmouseout="this.style.background='#ff2a2a'">Sign In to Portal</button>
+    </form>
+  </div>
+
+  <!-- FOOTER: Full Red Background dengan Model Kolom ala TuneCore (Tanpa teks copyright/link bawah) -->
+  <footer class="site-footer" style="width:100%; background:#ff2a2a; color:#fff; font-size:13px; box-sizing:border-box; padding:40px 32px;">
+    <div style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:30px;">
+      
+      <!-- Kolom 1 -->
+      <div>
+        <h4 style="color:#000; font-size:14px; margin-bottom:12px; text-transform:uppercase; letter-spacing:0.5px;">About Ferwap Music</h4>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+          <li><a href="https://ferwap.com/faq" style="color:#fff; text-decoration:none;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#fff'">Faq</a></li>
+          <li><a href="https://ferwap.com/privacy" style="color:#fff; text-decoration:none;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#fff'">privacy</a></li>
+          <li><a href="https://ferwap.com/contacts" style="color:#fff; text-decoration:none;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#fff'">contacts</a></li>
+          <li><a href="https://ferwap.com/terms" style="color:#fff; text-decoration:none;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#fff'">Terms</a></li>
+        </ul>
+      </div>
+
+      <!-- Kolom 2 -->
+      <div>
+        <h4 style="color:#000; font-size:14px; margin-bottom:12px; text-transform:uppercase; letter-spacing:0.5px;">Distribute Music</h4>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+          <li><a href="signup.html" style="color:#fff; text-decoration:none;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#fff'">Create Account</a></li>
+          <li><a href="index.html" style="color:#fff; text-decoration:none;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#fff'">Upload Release</a></li>
+          <li><a href="https://ferwap.com/artists" style="color:#fff; text-decoration:none;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#fff'">Artist</a></li>
+        </ul>
+      </div>
+
+      <!-- Kolom 3 -->
+      <div>
+        <h4 style="color:#000; font-size:14px; margin-bottom:12px; text-transform:uppercase; letter-spacing:0.5px;">Community & Social</h4>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+          <li><a href="https://www.facebook.com/ferwapmusic" style="color:#fff; text-decoration:none;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#fff'">Facebook</a></li>
+          <li><a href="https://www.instagram.com/ferwapmusic" style="color:#fff; text-decoration:none;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#fff'">Instagram</a></li>
+        </ul>
+      </div>
+
+      <!-- Kolom 4 -->
+      <div>
+        <h4 style="color:#000; font-size:14px; margin-bottom:12px; text-transform:uppercase; letter-spacing:0.5px;">Account Support</h4>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+          <li><a href="login.html" style="color:#fff; text-decoration:none;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#fff'">Sign In</a></li>
+          <li><a href="mailto:support@ferwap.com" style="color:#fff; text-decoration:none;" onmouseover="this.style.color='#000'" onmouseout="this.style.color='#fff'">Contact Us</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    const SUPABASE_URL = 'https://fvzayaghmxskcvwbllpr.supabase.co';
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_49UN3oQJiicqsIUj0nPEA_J2HVD1Dn';
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+    let mode = 'login';
+
+    function togglePasswordVisibility() {
+      const pwdInput = document.getElementById('auth-password');
+      const eyeIcon = document.getElementById('toggle-password');
+      if (pwdInput.type === 'password') {
+        pwdInput.type = 'text';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+      } else {
+        pwdInput.type = 'password';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+      }
+    }
+
+    function switchMode(newMode) {
+      mode = newMode;
+      const tabLogin = document.getElementById('tab-login');
+      const tabSignup = document.getElementById('tab-signup');
+      const nameGroup = document.getElementById('artist-name-group');
+      const btnSubmit = document.getElementById('btn-submit');
+
+      if (mode === 'signup') {
+        tabSignup.style.color = '#ff2a2a';
+        tabSignup.style.borderBottom = '2px solid #ff2a2a';
+        tabLogin.style.color = '#a0a0a0';
+        tabLogin.style.borderBottom = 'none';
+        nameGroup.style.display = 'flex';
+        btnSubmit.innerText = 'Sign Up';
+      } else {
+        tabLogin.style.color = '#ff2a2a';
+        tabLogin.style.borderBottom = '2px solid #ff2a2a';
+        tabSignup.style.color = '#a0a0a0';
+        tabSignup.style.borderBottom = 'none';
+        nameGroup.style.display = 'none';
+        btnSubmit.innerText = 'Sign In';
+      }
+    }
+
+    document.getElementById('auth-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('auth-email').value;
+      const password = document.getElementById('auth-password').value;
+
+      if (mode === 'signup') {
+        const artistName = document.getElementById('artist-name').value;
+        const { data, error } = await supabaseClient.auth.signUp({
+          email: email,
+          password: password,
+          options: { data: { display_name: artistName } }
+        });
+
+        if (error) {
+          alert("Registration failed: " + error.message);
+        } else {
+          alert("Registration successful! Please sign in.");
+          switchMode('login');
+        }
+      } else {
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
+          email: email,
+          password: password
+        });
+
+        if (error) {
+          alert("Sign in failed: " + error.message);
+        } else {
+          alert("Sign in successful!");
+          window.location.href = 'index.html';
+        }
+      }
+    });
+  </script>
+</body>
+</html>

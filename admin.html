@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ferwap Music - Global Admin Control Center</title>
+  <link rel="stylesheet" href="admin-style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    
+    <!-- ADMIN SIDEBAR -->
+    <aside class="admin-sidebar">
+      <div class="admin-brand">
+        <div class="brand-logo-admin">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <div class="brand-text">
+          <h2>FERWAP</h2>
+          <span>ADMIN COMMAND</span>
+        </div>
+      </div>
+
+      <nav class="admin-nav">
+        <a href="#" class="admin-nav-item active"><i class="fa-solid fa-list-check"></i> Release Queue</a>
+        <a href="#" class="admin-nav-item"><i class="fa-solid fa-database"></i> Global Catalog</a>
+        <a href="#" class="admin-nav-item"><i class="fa-solid fa-network-wired"></i> B2B API Status</a>
+      </nav>
+
+      <div class="admin-profile">
+        <div class="admin-avatar">AD</div>
+        <div class="admin-meta">
+          <p class="admin-name">System Owner</p>
+          <span class="admin-role">Super Administrator</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN ADMIN CONTENT -->
+    <main class="admin-main">
+      
+      <!-- TOPBAR -->
+      <header class="admin-topbar">
+        <div>
+          <h1 class="page-headline">Global Distribution Control</h1>
+          <p class="page-subline">Review incoming releases, validate UPC/ISRC codes, and trigger B2B DDEX XML delivery.</p>
+        </div>
+        <div class="badge-server">
+          <span class="server-dot"></span> B2B Gateway Online
+        </div>
+      </header>
+
+      <!-- RELEASES TABLE SECTION -->
+      <section class="admin-card">
+        <div class="card-header-admin">
+          <h3><i class="fa-solid fa-clock-rotate-left"></i> Incoming Artist Releases</h3>
+          <p>Releases submitted from artist portals awaiting your final approval.</p>
+        </div>
+
+        <div class="table-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Release Title</th>
+                <th>Artist</th>
+                <th>UPC Code</th>
+                <th>ISRC Code</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-table-body">
+              <!-- Data akan dimuat secara dinamis melalui JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- DDEX XML INSPECTION MODAL -->
+  <div id="xml-modal" class="modal-backdrop">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div>
+          <h3><i class="fa-solid fa-code"></i> DDEX ERN 3.8 Payload Engine</h3>
+          <span class="modal-subtext">Automated XML generation for DSP Global Delivery</span>
+        </div>
+        <button class="btn-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <pre><code id="xml-content">Loading XML structure...</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin-app.js"></script>
+</body>
+</html>
